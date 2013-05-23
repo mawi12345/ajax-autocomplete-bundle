@@ -1,0 +1,4 @@
+{% block mawi_ajax_autocomplete_widget %}
+	{{ form_widget(form.label, {'attr': {'class': 'maj-query', 'data-autocomplete': entity_alias}}) }}
+	{{ form_widget(form.id, {'attr': {'class': 'maj-id'}}) }}
+{% endblock %}

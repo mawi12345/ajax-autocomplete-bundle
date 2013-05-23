@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="mawi.autocomplete.type.ajax_autocomplete" class="Mawi\AjaxAutocompleteBundle\Form\Type\AjaxAutocompleteType">
+            <tag name="form.type" alias="mawi_ajax_autocomplete" />
+            <argument type="service" id="service_container"/>
+        </service>
+        <service id="mawi.autocomplete.entities" class="Mawi\AjaxAutocompleteBundle\Service\EntitiesService">
+			<call method="setContainer">
+				<argument type="service" id="service_container"/>
+			</call>
+        </service>
+        <service id="mawi.autocomplete.handler" class="Mawi\AjaxAutocompleteBundle\Service\AjaxAutocomplete">
+			<call method="setContainer">
+				<argument type="service" id="service_container"/>
+			</call>
+        </service>
+    </services>
+</container>
