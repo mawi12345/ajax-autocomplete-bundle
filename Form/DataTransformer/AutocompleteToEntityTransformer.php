@@ -57,11 +57,13 @@ class AutocompleteToEntityTransformer implements DataTransformerInterface
 
     public function reverseTransform($value)
     {
-    	if ($value === null || !is_array($value) || !array_key_exists('id', $value) || !array_key_exists('label', $value)) return $value;
-    	        
-    	if (!is_numeric($value['id']))
+    	if ($value === null || 
+    		!is_array($value) || 
+    		!array_key_exists('id', $value) || 
+    		!array_key_exists('label', $value) ||
+    		!is_numeric($value['id']))
     	{
-    		throw new TransformationFailedException(sprintf('The entity with key "%s" could not be found', $value['id']));
+    		return null;
     	}
     	    	
     	$repository = $this->em->getRepository($this->config['class']);
