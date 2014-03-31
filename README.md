@@ -22,7 +22,7 @@ You also have to install [FOSJsRoutingBundle](https://github.com/FriendsOfSymfon
     {
         return array(
             // ...
-            new AM\AjaxAutocompleteBundle\AMAjaxAutocompleteBundle(),
+            new Mawi\AjaxAutocompleteBundle\AMAjaxAutocompleteBundle(),
             // ...
         );
     }
