@@ -13,8 +13,8 @@ AjaxAutocompleteBundle - easy jquery ui autocomplete for symfony2
 }
 ```
 
-You also have to install [FOSJsRoutingBundle](https://github.com/FriendsOfSymfony/FOSJsRoutingBundle).
-
+You also have to install [FOSJsRoutingBundle](https://github.com/FriendsOfSymfony/FOSJsRoutingBundle)
+(its required via composer.json of ours, but you need to add it to the AppKernel.php!)
 ### Add AjaxAutocompleteBundle to your application kernel
 ```
     // app/AppKernel.php
@@ -22,7 +22,7 @@ You also have to install [FOSJsRoutingBundle](https://github.com/FriendsOfSymfon
     {
         return array(
             // ...
-            new Mawi\AjaxAutocompleteBundle\AMAjaxAutocompleteBundle(),
+            new Mawi\AjaxAutocompleteBundle\MawiAjaxAutocompleteBundle(),
             // ...
         );
     }
@@ -37,15 +37,14 @@ mawi_ajaxautocomplete:
     resource: "@MawiAjaxAutocompleteBundle/Resources/config/routing.xml"
 ```
 
-### Update your configuration
+### Update your configuration (app/config/config.yml)
 
 #### Add form theming to twig
 ```
 twig:
     ...
     form:
-        resources:
-            - MawiAjaxAutocompleteBundle::fields.html.twig
+        resources: [ 'MawiAjaxAutocompleteBundle::fields.html.twig' ]
 ```
 #### Add autocomplete config
 ```
@@ -66,9 +65,24 @@ mawi_ajax_autocomplete:
             max: 20
 ```
 
-### Load jQuery in your views
+### Load needed Javascript in your views
 ```
     <script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    {% javascripts
+        '@MawiAjaxAutocompleteBundle/Resources/public/js/autocomplete.js'
+        output='js/mawi-autocomplete.js'
+        filter='?uglifyjs'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+```
+### Load CSS in your views
+``` 
+    {% stylesheets '@MawiAjaxAutocompleteBundle/Resources/public/css/*' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
 ```
 ### Use the FormType
 ```
