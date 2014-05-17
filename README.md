@@ -28,9 +28,7 @@ You also have to install [FOSJsRoutingBundle](https://github.com/FriendsOfSymfon
     }
 ```
 
-### Import routes
-
-// app/config/routing.yml
+### Import routes (app/config/routing.yml)
 
 ```
 mawi_ajaxautocomplete:
