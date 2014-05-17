@@ -13,8 +13,6 @@ AjaxAutocompleteBundle - easy jquery ui autocomplete for symfony2
 }
 ```
 
-You also have to install [FOSJsRoutingBundle](https://github.com/FriendsOfSymfony/FOSJsRoutingBundle).
-
 ### Add AjaxAutocompleteBundle to your application kernel
 ```
     // app/AppKernel.php
@@ -22,7 +20,7 @@ You also have to install [FOSJsRoutingBundle](https://github.com/FriendsOfSymfon
     {
         return array(
             // ...
-            new Mawi\AjaxAutocompleteBundle\AMAjaxAutocompleteBundle(),
+            new Mawi\AjaxAutocompleteBundle\MawiAjaxAutocompleteBundle(),
             // ...
         );
     }
