@@ -52,16 +52,6 @@ $(function() {
 	                }
 	            });
 	        },
-	        open: function(event, ui) {
-	        	// Try to select the first one if it's the only one
-	        	var menu = $(this).data('mawiAjautocomplete').menu;
-        		if (typeof menu !== "undefined" && menu !== null && typeof menu.element !== "undefined" && menu.element !== null) {
-    	        	var $children = menu.element.children();
-    	        	if ($children.size() == 1) {
-    	        		$children.children('a').mouseenter().click();
-    	        	}
-        		}
-	        },
 	        minLength: 2,
 			select: function( event, ui ) {
 				$('#'+hid).val(ui.item.value);
