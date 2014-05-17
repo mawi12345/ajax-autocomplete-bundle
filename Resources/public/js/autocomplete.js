@@ -1,4 +1,5 @@
 $(function() {
+    var cache = {};
 	$.widget( "mawi.ajautocomplete", $.ui.autocomplete, {
 		_renderItem: function( ul, item ) {
 			return $( "<li></li>" )
@@ -19,16 +20,13 @@ $(function() {
 		var alias = $this.attr('data-autocomplete');
 		var aid = $this.attr('id');
 		var hid = aid.slice(0, aid.length - 5)+'id';
-		console.log(hid);
-		$('#'+aid).on('keydown',function(e){
-			//delete or backspace
-		    if(e.keyCode == 46 || e.keyCode == 8) {
-		    	$('#'+hid).val('');
-		    	$('#'+aid).val('');
-		    }
-		});
 	    $( '#'+aid ).ajautocomplete({
 	        source: function( request, response ) {
+                var term = request.term;
+                if ( term in cache ) {
+                  response( cache[ term ] );
+                  return;
+                }
 	        	var reqData = $( '#'+aid ).closest( 'form' ).serialize()+'&term='+request.term+'&alias='+alias;
 	            $.ajax({
 	                url: Routing.generate('mawi_ajaxautocomplete'),
@@ -50,6 +48,7 @@ $(function() {
 	                            clazz: ''
 	                        };
 	                    }));
+                        cache[ term ] = data;
 	                }
 	            });
 	        },
